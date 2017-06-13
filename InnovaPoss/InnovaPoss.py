@@ -1,13 +1,16 @@
 import pika
 import time
 import subprocess
+import os
 from Config.cConfig import cConfig as  oConfig
 from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
 
-print("Ejecutando sockserver")
-subprocess.call(['./Ejecutables/Sockserver'])
+path = f'{os.path.dirname(__file__)}/Ejecutables/Sockserver'
+print(f"Ejecutando sockserver desde {path}")
+exit_status = subprocess.call([path])
+print(f"Ejecutando sockserver {exit_status}")
 print("Lectura de la maquina")
 
 
