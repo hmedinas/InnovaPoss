@@ -34,6 +34,12 @@ print(result)
 def monedero_callback(mensaje):
     print(mensaje)
 mon_adapter.incoming_msg_handler = monedero_callback
+
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
+print(f"Ejecutando sockmon desde {path}")
+exit_status = subprocess.Popen([path])
+print(f"Ejecutando sockmon {exit_status}")
+
 def callback(ch, method, properties, body):
     print(body) 
     result=body.decode("utf-8").split('|')  #SR|guid|1|234234
