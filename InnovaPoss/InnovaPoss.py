@@ -21,6 +21,7 @@ ccm_adapter=TCPDataAdapter()
 mon_adapter=TCPDataAdapter()
 ccm_adapter.open()
 mon_adapter.bind_and_setup_listening()
+
 '''
 result = ccm_adapter.transact_message("CCM_Getstatus")
 print(result)
@@ -30,6 +31,9 @@ result = ccm_adapter.transact_message("CCM_Write(1,1)")
 print(result)
 '''
 
+def monedero_callback(mensaje):
+    print(mensaje)
+mon_adapter.incoming_msg_handler = monedero_callback
 def callback(ch, method, properties, body):
     print(body) 
     result=body.decode("utf-8").split('|')  #SR|guid|1|234234
