@@ -1,11 +1,13 @@
 import pika
 import time
+import subprocess
 from Config.cConfig import cConfig as  oConfig
 from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
 
-
+print("Ejecutando sockserver")
+subprocess.call(['./Ejecutables/Sockserver'])
 print("Lectura de la maquina")
 
 
