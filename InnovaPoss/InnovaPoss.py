@@ -2,10 +2,23 @@ import pika
 import time
 import subprocess
 import os
+
 from Config.cConfig import cConfig as  oConfig
 from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
+
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/3001'
+print(f"Ejecutando 3001 desde {path}")
+exit_status = subprocess.Popen([path])
+print(f"Ejecutando 3001 {exit_status}")
+
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/CCM'
+print(f"Ejecutando CCM desde {path}")
+exit_status = subprocess.Popen([path])
+print(f"Ejecutando CCM {exit_status}")
+
+time.sleep(2)
 
 path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
 print(f"Ejecutando sockserver desde {path}")
@@ -32,7 +45,7 @@ print(result)
 '''
 
 def monedero_callback(mensaje):
-    print(mensaje)
+    print(f"New monedero message {mensaje}")
 mon_adapter.incoming_msg_handler = monedero_callback
 
 path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
