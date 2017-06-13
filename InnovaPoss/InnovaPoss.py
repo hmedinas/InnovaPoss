@@ -9,7 +9,7 @@ from TCPClient import TCPDataAdapter
 
 path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
 print(f"Ejecutando sockserver desde {path}")
-exit_status = subprocess.call([path])
+exit_status = subprocess.Popen([path])
 print(f"Ejecutando sockserver {exit_status}")
 print("Lectura de la maquina")
 
