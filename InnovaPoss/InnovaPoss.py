@@ -3,6 +3,7 @@ import time
 from Config.cConfig import cConfig as  oConfig
 from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
+from TCPClient import TCPDataAdapter
 
 
 print("Lectura de la maquina")
@@ -11,6 +12,16 @@ print("Lectura de la maquina")
 Conexion=pika.BlockingConnection(pika.URLParameters(oConfig.ConexionRabbit()))
 Canal=Conexion.channel()
 Canal.queue_declare(queue=oConfig.IN_NameQueue(),durable=True)
+ccm_adapter=TCPDataAdapter()
+mon_adapter=TCPDataAdapter()
+ccm_adapter.open()
+mon_adapter.bind_and_setup_listening()
+result = ccm_adapter.transact_message("CCM_Getstatus")
+print(result)
+result = ccm_adapter.transact_message("CCM_Select(1,1)")
+print(result)
+result = ccm_adapter.transact_message("CCM_Write(1,1)")
+print(result)
 
 def callback(ch, method, properties, body):
     print(body) 
@@ -20,12 +31,14 @@ def callback(ch, method, properties, body):
     
     if result[0]=='SR':#servidor
         if result[2]=='1': #Estatus maquina
-            Rpt=oSimulador.CCN_Status()
+            Rpt = ccm_adapter.transact_message("CCM_Getstatus")
+            #Rpt=oSimulador.CCN_Status()
             concatenado='CL|'+result[1]+'|'+result[2]+'|'+Rpt
             print('Estatus Maquina: '+Rpt)
             oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
         if result[2]=='2': #Despacho maquina #SR|guid|2|1,2
-            Rpt=oSimulador.CCN_Status()
+            Rpt = ccm_adapter.transact_message("CCM_Getstatus")
+            #Rpt=oSimulador.CCN_Status()
             if Rpt=='KO':
                 concatenado='CL|'+result[1]+'|'+result[2]+'|'+Rpt               
                 oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)

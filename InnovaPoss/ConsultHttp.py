@@ -1,6 +1,6 @@
 import requests
 from Config.cConfig import cConfig as  oConfig
-from cConfig import CCNDespacho as Enum
+from Config.cConfig import CCNDespacho as Enum
 
 class Simulator:
      
