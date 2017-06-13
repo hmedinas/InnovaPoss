@@ -7,7 +7,7 @@ from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
 
-path = f'{os.path.dirname(__file__)}/Ejecutables/Sockserver'
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
 print(f"Ejecutando sockserver desde {path}")
 exit_status = subprocess.call([path])
 print(f"Ejecutando sockserver {exit_status}")
