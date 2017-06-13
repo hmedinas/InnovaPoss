@@ -46,14 +46,14 @@ def callback(ch, method, properties, body):
         if result[2]=='2': #Despacho maquina #SR|guid|2|1,2
             Rpt = ccm_adapter.transact_message("CCM_Getstatus")
             #Rpt=oSimulador.CCN_Status()
-            if Rpt=='KO':
-                concatenado='CL|'+result[1]+'|'+result[2]+'|'+Rpt               
-                oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
-            else:
-                Rpt1=oSimulador.CCN_Preparar(result[3])
-                if Rpt1=='OK':
-                    Rpt2=oSimulador.CCN_Despachar(result[3])
-                    if Rpt2=='OK':
+            if 'OK' in Rpt:
+                # Rpt1=oSimulador.CCN_Preparar(result[3])
+                Rpt1= ccm_adapter.transact_message("CCM_Select("+result[3]+")")
+
+                if 'OK' in Rpt1:
+                    #Rpt2=oSimulador.CCN_Despachar(result[3])
+                    Rpt2= ccm_adapter.transact_message("CCM_Write("+result[3]+")")
+                    if 'OK' in Rpt2:
                         concatenado='CL|'+result[1]+'|'+result[2]+'|Despachando'
                         oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
                     else:
@@ -63,6 +63,10 @@ def callback(ch, method, properties, body):
                     concatenado='CL|'+result[1]+'|'+result[2]+'|Error'
                     oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
                     print('Error Preparando')
+            else:
+               concatenado='CL|'+result[1]+'|'+result[2]+'|ERROR'               
+               oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
+            
 
            
     if result[0]=='CL':#servidor
