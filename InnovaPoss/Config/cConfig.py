@@ -21,7 +21,7 @@ class cConfig:
     def GetIP():
         nombre_equipo = socket.gethostname()
         direccion_equipo = socket.gethostbyname(nombre_equipo)
-        return direccion_equipo.replace(".", "")
+        return "1921681126" ##direccion_equipo.replace(".", "")
 
     def NameQueue():        
         return cConfig.GetIP()

@@ -21,12 +21,14 @@ ccm_adapter=TCPDataAdapter()
 mon_adapter=TCPDataAdapter()
 ccm_adapter.open()
 mon_adapter.bind_and_setup_listening()
+'''
 result = ccm_adapter.transact_message("CCM_Getstatus")
 print(result)
 result = ccm_adapter.transact_message("CCM_Select(1,1)")
 print(result)
 result = ccm_adapter.transact_message("CCM_Write(1,1)")
 print(result)
+'''
 
 def callback(ch, method, properties, body):
     print(body) 
