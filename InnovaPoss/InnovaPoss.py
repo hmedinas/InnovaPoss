@@ -91,6 +91,10 @@ def callback(ch, method, properties, body):
             else:
                concatenado='CL|'+result[1]+'|'+result[2]+'|ERROR'               
                oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
+        if result[2]=='3':
+            print(f"Sending {result[3]}")
+            result_ccm = ccm_adapter.transact_message(result[3])
+            print(f"Response {result_ccm}")
             
 
            
