@@ -45,14 +45,16 @@ def callback(ch, method, properties, body):
             oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
         if result[2]=='2': #Despacho maquina #SR|guid|2|1,2
             Rpt = ccm_adapter.transact_message("CCM_Getstatus")
+            print(f"GetStatus Result {Rpt}")
             #Rpt=oSimulador.CCN_Status()
             if 'OK' in Rpt:
                 # Rpt1=oSimulador.CCN_Preparar(result[3])
                 Rpt1= ccm_adapter.transact_message("CCM_Select("+result[3]+")")
-
+                print(f"Select Result {Rpt1}")
                 if 'OK' in Rpt1:
                     #Rpt2=oSimulador.CCN_Despachar(result[3])
                     Rpt2= ccm_adapter.transact_message("CCM_Write("+result[3]+")")
+                    print(f"Write Result {Rpt2}")
                     if 'OK' in Rpt2:
                         concatenado='CL|'+result[1]+'|'+result[2]+'|Despachando'
                         oMessage.WriteMessage(oConfig.ConexionRabbit(),oConfig.OUT_NameQueue(),concatenado)
