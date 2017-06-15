@@ -43,6 +43,7 @@ class TCPDataAdapter():
         print("Binding port")
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.bind(("localhost", 3001))
+        self.sock.settimeout(1)
         print("Port binding done")
         self.sock.listen()
         self._is_opened_ = True
