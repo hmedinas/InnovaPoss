@@ -18,7 +18,7 @@ print(f"Ejecutando CCM desde {path}")
 exit_status = subprocess.Popen([path])
 print(f"Ejecutando CCM {exit_status}")
 
-time.sleep(2)
+
 
 path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
 print(f"Ejecutando sockserver desde {path}")
@@ -26,6 +26,7 @@ exit_status = subprocess.Popen([path])
 print(f"Ejecutando sockserver {exit_status}")
 print("Lectura de la maquina")
 
+time.sleep(2)
 
 Conexion=pika.BlockingConnection(pika.URLParameters(oConfig.ConexionRabbit()))
 Canal=Conexion.channel()
@@ -48,10 +49,10 @@ def monedero_callback(mensaje):
     print(f"New monedero message {mensaje}")
 mon_adapter.incoming_msg_handler = monedero_callback
 
-path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
-print(f"Ejecutando sockmon desde {path}")
-exit_status = subprocess.Popen([path])
-print(f"Ejecutando sockmon {exit_status}")
+#path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
+#print(f"Ejecutando sockmon desde {path}")
+#exit_status = subprocess.Popen([path])
+#print(f"Ejecutando sockmon {exit_status}")
 
 def callback(ch, method, properties, body):
     print(body) 
