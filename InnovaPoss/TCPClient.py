@@ -12,10 +12,10 @@ class TCPDataAdapter():
         TCPDataAdapter constructor
         
         """
-        self.read_stop_byte = str.encode('/n')
+        self.read_stop_byte = str.encode('\n')
         self.sock: socket.socket = None
         self.logger = logging.getLogger(__name__)
-        self.logger.debug("Adapter instantiated")
+        print("Adapter instantiated")
         self.incoming_msg_handler: Callable[[Any, str], str] = None
         self._is_opened_ = False
 
@@ -26,11 +26,11 @@ class TCPDataAdapter():
         :return: None
         :rtype: None
         """
-        self.logger.debug("Opening connection")
+        print("Opening connection")
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect(("localhost", 3000))
         self.sock.settimeout(1)
-        self.logger.debug("Connection opened")
+        print("Connection opened")
         self._is_opened_ = True
 
     def bind_and_setup_listening(self):
@@ -40,13 +40,15 @@ class TCPDataAdapter():
         :return: None
         :rtype: None
         """
-        self.logger.debug("Binding port")
+        print("Binding port")
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.bind(("localhost", 3001))
-        self.logger.debug("Port binding done")
+        print("Port binding done")
         self.sock.listen()
+        self._is_opened_ = True
         start_new_thread(self.accept_new_connections_loop, ())
-        self.logger.debug("Port bound and listener started")
+        print("Port bound and listener started")
+        
 
     def set_message_handler(self, handler: Callable[[Any, str], str]):
         """
@@ -64,7 +66,7 @@ class TCPDataAdapter():
         self.incoming_msg_handler = handler
 
     def send_message(self, message: str):
-        self.logger.debug(f"Sending message '{message}'")
+        print(f"Sending message '{message}'")
         self.sock.send(str.encode(f'{message}\n'))
 
     def receive_message_with_stop_byte(self) -> str:
@@ -73,9 +75,9 @@ class TCPDataAdapter():
         :return: read message 
         :rtype: str
         """
-        self.logger.debug(f"Starting to read reply")
+        print(f"Starting to read reply")
         reply = self.__read_until_stop_byte_or_timeout__(self.sock)
-        self.logger.debug(f"Reply length - {len(reply)}. Reply - '{reply}'")
+        print(f"Reply length - {len(reply)}. Reply - '{reply}'")
         return reply
 
     def transact_message(self, message: str) -> str:
@@ -86,26 +88,28 @@ class TCPDataAdapter():
         :return: received answer
         :rtype: str
         """
-        self.logger.debug(f"Transacting message {message}")
+        print(f"Transacting message {message}")
         self.send_message(message)
         sleep(1)
         reply = self.receive_message_with_stop_byte()
         return reply
 
     def accept_new_connections_loop(self):
+        print(f"Entered accept new connection")
         while self._is_opened_:
+            print(f"Accepting new connectiions loop entered. ")
             conn, address = self.sock.accept()
-            self.logger.debug(f"Accepted a new connection on {address}. Starting handler thread")
+            print(f"Accepted a new connection on {address}. Starting handler thread")
             start_new_thread(self.handle_client_messages_loop, (conn, address))
 
     def handle_client_messages_loop(self, connection, address):
         while self._is_opened_:
             result = self.__read_until_stop_byte_or_timeout__(connection)
             if result and self.incoming_msg_handler is not None:
-                # self.logger.debug(f"New message on port {address}: {result} ")
+                print(f"New message on port {address}: {result} ")
                 reply_to_send = self.incoming_msg_handler(result)
                 if reply_to_send:
-                    self.logger.debug(f"Callback returned {reply_to_send}. Replying")
+                    print(f"Callback returned {reply_to_send}. Replying")
                     connection.send(str.encode(reply_to_send))
             else:
                 sleep(0.5)

@@ -37,6 +37,9 @@
     <Compile Include="Queue\Recive.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Run.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TCPClient.py">
       <SubType>Code</SubType>
     </Compile>
