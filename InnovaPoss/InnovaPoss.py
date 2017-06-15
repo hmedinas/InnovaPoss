@@ -10,7 +10,7 @@ from TCPClient import TCPDataAdapter
 
 path = f'/home/pi/innovapos-demo/innovaposs/ejecutables/3001'
 print(f"ejecutando 3001 desde {path}")
-exit_status = subprocess.popen([path])
+exit_status = subprocess.Popen([path])
 print(f"ejecutando 3001 {exit_status}")
 
 path = f'/home/pi/innovapos-demo/innovaposs/ejecutables/ccm'
@@ -48,10 +48,10 @@ def monedero_callback(mensaje):
     print(f"New monedero message {mensaje}")
 mon_adapter.incoming_msg_handler = monedero_callback
 
-#path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
-#print(f"Ejecutando sockmon desde {path}")
-#exit_status = subprocess.Popen([path])
-#print(f"Ejecutando sockmon {exit_status}")
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockmon'
+print(f"Ejecutando sockmon desde {path}")
+exit_status = subprocess.Popen([path])
+print(f"Ejecutando sockmon {exit_status}")
 
 def callback(ch, method, properties, body):
     print(body) 
