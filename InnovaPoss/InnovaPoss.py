@@ -8,15 +8,15 @@ from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
 
-path = f'/home/pi/innovapos-demo/innovaposs/ejecutables/3001'
-print(f"ejecutando 3001 desde {path}")
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/3001'
+print(f"Ejecutando 3001 desde {path}")
 exit_status = subprocess.Popen([path])
-print(f"ejecutando 3001 {exit_status}")
+print(f"Ejecutando 3001 {exit_status}")
 
-path = f'/home/pi/innovapos-demo/innovaposs/ejecutables/ccm'
-print(f"ejecutando ccm desde {path}")
-exit_status = subprocess.popen([path])
-print(f"ejecutando ccm {exit_status}")
+path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/CCM'
+print(f"Ejecutando CCM desde {path}")
+exit_status = subprocess.Popen([path])
+print(f"Ejecutando CCM {exit_status}")
 
 time.sleep(2)
 
