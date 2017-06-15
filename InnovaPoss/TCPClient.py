@@ -104,6 +104,7 @@ class TCPDataAdapter():
 
     def handle_client_messages_loop(self, connection, address):
         while self._is_opened_:
+            print("Reading new message")
             result = self.__read_until_stop_byte_or_timeout__(connection)
             if result and self.incoming_msg_handler is not None:
                 print(f"New message on port {address}: {result} ")
@@ -123,6 +124,7 @@ class TCPDataAdapter():
     def __read_until_stop_byte_or_timeout__(self, connection: socket.socket) -> str:
         """
         Reads the TCP stream until the end char is met
+
         :return: full response
         :rtype: str
         """
