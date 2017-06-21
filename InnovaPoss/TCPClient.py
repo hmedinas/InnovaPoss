@@ -34,21 +34,24 @@ class TCPDataAdapter():
         self._is_opened_ = True
 
     def bind_and_setup_listening(self):
-        """
-        Binds the passed port for new connections
+        try:
+            """
+            Binds the passed port for new connections
         
-        :return: None
-        :rtype: None
-        """
-        print("Binding port")
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.bind(("localhost", 3001))
-        self.sock.settimeout(1)
-        print("Port binding done")
-        self.sock.listen()
-        self._is_opened_ = True
-        start_new_thread(self.accept_new_connections_loop, ())
-        print("Port bound and listener started")
+            :return: None
+            :rtype: None
+            """
+            print("Binding port 3001")
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.sock.bind(("localhost", 3001))
+            self.sock.settimeout(1)
+            print("Port binding done")
+            self.sock.listen()
+            self._is_opened_ = True
+            start_new_thread(self.accept_new_connections_loop, ())
+            print("Port bound and listener started")
+        except Exception as exc:
+            print('error')
         
 
     def set_message_handler(self, handler: Callable[[Any, str], str]):

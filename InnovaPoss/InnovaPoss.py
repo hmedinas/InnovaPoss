@@ -8,23 +8,25 @@ from Queue.cMenssage import cMessage as oMessage
 from ConsultHttp import Simulator as oSimulador
 from TCPClient import TCPDataAdapter
 
-path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/3001'
-print(f"Ejecutando 3001 desde {path}")
-exit_status = subprocess.Popen([path])
-print(f"Ejecutando 3001 {exit_status}")
-
-path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/CCM'
-print(f"Ejecutando CCM desde {path}")
-exit_status = subprocess.Popen([path])
-print(f"Ejecutando CCM {exit_status}")
 
 
-
-path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
-print(f"Ejecutando sockserver desde {path}")
-exit_status = subprocess.Popen([path])
-print(f"Ejecutando sockserver {exit_status}")
-print("Lectura de la maquina")
+#path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/3001'
+#print(f"Ejecutando 3001 desde {path}")
+#exit_status = subprocess.Popen([path])
+#print(f"Ejecutando 3001 {exit_status}")
+#
+#path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/CCM'
+#print(f"Ejecutando CCM desde {path}")
+#exit_status = subprocess.Popen([path])
+#print(f"Ejecutando CCM {exit_status}")
+#
+#
+#
+#path = f'/home/pi/innovapos-demo/InnovaPoss/Ejecutables/Sockserver'
+#print(f"Ejecutando sockserver desde {path}")
+#exit_status = subprocess.Popen([path])
+#print(f"Ejecutando sockserver {exit_status}")
+#print("Lectura de la maquina")
 
 time.sleep(2)
 
