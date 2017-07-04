@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>541025a6-58e0-41dd-8501-ae09d9ae8ee4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>InnovaPoss.py</StartupFile>
+    <StartupFile>Test\NewMessage.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -43,11 +43,15 @@
     <Compile Include="TCPClient.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\NewMessage.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Message\" />
     <Folder Include="Config\" />
     <Folder Include="Ejecutables\" />
+    <Folder Include="Test\" />
     <Folder Include="Queue\" />
   </ItemGroup>
   <ItemGroup>
