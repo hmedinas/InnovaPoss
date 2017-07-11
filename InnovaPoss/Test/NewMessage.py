@@ -19,6 +19,8 @@ import pika.spec as spec
 from pika.utils import is_callable
 from pika.compat import unicode_type, dictkeys, as_bytes
 
+import datetime
+
 
 LOGGER = logging.getLogger(__name__)
 MAX_CHANNELS = 32768
@@ -27,14 +29,20 @@ MAX_CHANNELS = 32768
 class Messaje():
     Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":120}'
     Prepare:str=' {"Comand": "PREPARE","Phone": ""}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":1.5,"Promo":"true" } '
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":0,"Promo":"true" } '
     Cancel:str=''
+    Finish:str=''
+    ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
 class ComandType():
     Start:str='ccm.start'
     Prepare:str='ccm.prepare'
     Disapacher:str='ccm.dispacher'
     Cancel:str='ccm.Cancel'
+    Finish:str='ccm.finish'
+    ServerMsg:str='ccm.server'
+    Stock:str='ccm.stock'
+
 
 class SendMessageRabbit():
     Credenciales:str='ampqs://innova_demo:dimatica@innova.boromak.com'
@@ -52,6 +60,7 @@ class SendMessageRabbit():
 
     
     def sendStart(self):
+       
         Cx=pika.BlockingConnection(pika.URLParameters(self.Credenciales))
         ch=Cx.channel()
         ch.queue_declare(queue='IN_123456789',durable=True)
@@ -80,7 +89,7 @@ class SendMessageRabbit():
                       properties=pika.BasicProperties(
                          delivery_mode = 2, # make message persistent
                          type=ComandType
-                         ,expiration='200000'
+                         #,expiration='200000'
                       ))
                     
         #self.Conexion.close()
@@ -95,7 +104,12 @@ class SendMessageRabbit():
     def queue_purge(self,_Queue:str):
         self.Canal.queue_purge(_Queue)
 
-
+    def restar_hora(self,hora1,hora2):
+        formato = "%H:%M:%S"
+        h1 = datetime.strptime(hora1, formato)
+        h2 = datetime.strptime(hora2, formato)
+        resultado = h1 - h2
+        return str(resultado)
        
 
 
@@ -106,12 +120,27 @@ if __name__=='__main__':
     _server:str=''
     _client:str=''
 
+
+    fecha:datetime=None
+    fecha1=datetime.datetime.now()
+    fecha2=datetime.timedelta(minutes=2,seconds=0)
+    Resul=fecha1+fecha2
+    print(type(Resul))
+    print(Resul.strftime('%H:%M:%S'))
+
+    #rpt=msg.restar_hora("10:40:50","10:30:30")
+    
+    #print(rpt)
+
     while True:
         rpt=str(input('''¿Ingrese Accion?
 S ==> Inicio Proceso.
 P ==> Prepara Maquina.
 C ==> Cancelar todo.
 D ==> Despachar Producto.
+F ==> Finish de proceso
+MS ==> Mensaje servidor
+ST ==> Stock
 del==> Elimina Cola
 pur ==> Purga Cola 
 '''))
@@ -129,5 +158,14 @@ pur ==> Purga Cola
         if rpt=='D':
             msg.sendMessage(ComandType=_ComandType.Disapacher,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Dispachar,_durable=True)
             print('Despachando')
+        if rpt=='F':
+            msg.sendMessage(ComandType=_ComandType.Finish,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Finish,_durable=True)
+            print('Finalizado')
+        if rpt=='MS':
+             msg.sendMessage(ComandType=_ComandType.ServerMsg,_Queue='OUT_ServerREAD',_Message=_oMessage.ServerMsg,_durable=True)
+             print('Mensaje Server')
         if rpt=='del':
             msg.queue_delete('INC_123456789')
+        if rpt=='ST':
+            msg.sendMessage(ComandType=_ComandType.Stock,_Queue=msg.IN_NameQueue_Server,_Message='',_durable=True)
+            print('Mensaje Server')

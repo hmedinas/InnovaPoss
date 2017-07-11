@@ -61,6 +61,7 @@
     <Content Include="Ejecutables\3001" />
     <Content Include="Ejecutables\CCM" />
     <Content Include="Ejecutables\Sockmon" />
+    <Content Include="Ejecutables\Sockmontest" />
     <Content Include="Ejecutables\Sockserver" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
