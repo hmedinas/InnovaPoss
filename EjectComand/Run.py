@@ -39,7 +39,10 @@ def startProcess():
 
 if __name__ == "__main__":  
     startProcess()
+    i=0
     while True:
-        print("...")
+        time.sleep(20)
+        i=i+1       
+        print(f"...  {i}")
 
 
