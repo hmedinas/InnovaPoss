@@ -1,5 +1,4 @@
 import sys
-import psutil
 import subprocess
 import time
 
@@ -39,4 +38,7 @@ def startProcess():
 
 if __name__ == "__main__":  
     startProcess()
+    while True:
+        print("...")
+
 
