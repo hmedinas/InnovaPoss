@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>f3a4fcb2-e8e8-4aba-84a8-b61096cd8c0d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>EjectComand.py</StartupFile>
+    <StartupFile>Run.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
