@@ -5,7 +5,9 @@ import subprocess
 import time
 import os
 
+psutil.pids()
 print('iniciando matado de proceso')
+
 for i in psutil.pids():
     process = psutil.Process(i)
     if process.name() == '3001':
