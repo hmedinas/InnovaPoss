@@ -12,7 +12,7 @@ for process in psutil.process_iter():
    
     if process.name() == '3001' or  process.name() == 'CCM' or  process.name() == 'Sockmon' or process.name() == 'Sockserver':
         print(f'matando proceso : {process.name()}')
-        process.kill()()
+        process.kill()
         print('proceso muerto')
    
 
