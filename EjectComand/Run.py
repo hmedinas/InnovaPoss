@@ -2,7 +2,7 @@ import sys
 import subprocess
 import time
 import psutil
-
+import os
 
 def startProcess():
     # return
@@ -37,7 +37,10 @@ def startProcess():
     print('HMS: Ejecutando Sockmon')
     statusSockmon = subprocess.Popen([pathSockmon])
 
-if __name__ == "__main__":  
+if __name__ == "__main__": 
+    os.system("fuser -k 3000/tcp")
+    os.system("fuser -k 3001/tcp")
+    print('close puertos por seguridad')
     startProcess()
     i=0
     while True:
