@@ -40,7 +40,7 @@ def startProcess():
 if __name__ == "__main__": 
     os.system("fuser -k 3000/tcp")
     os.system("fuser -k 3001/tcp")
-    return
+    '''
     print('close puertos por seguridad')
     startProcess()
 
@@ -49,5 +49,5 @@ if __name__ == "__main__":
         time.sleep(20)
         i=i+1       
         print(f"...  {i}")
-
+        '''
 
