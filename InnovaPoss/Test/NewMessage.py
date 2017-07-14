@@ -27,9 +27,9 @@ MAX_CHANNELS = 32768
 
 
 class Messaje():
-    Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":120}'
+    Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":3600}'
     Prepare:str=' {"Comand": "PREPARE","Phone": ""}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":0,"Promo":"true" } '
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":1,"Promo":"true" } '
     Cancel:str=''
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
