@@ -43,6 +43,9 @@
     <Compile Include="TCPClient.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Test\killProceso.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Test\NewMessage.py">
       <SubType>Code</SubType>
     </Compile>
