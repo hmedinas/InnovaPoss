@@ -110,7 +110,26 @@ class SendMessageRabbit():
         h2 = datetime.strptime(hora2, formato)
         resultado = h1 - h2
         return str(resultado)
-       
+    def killProcesos():
+        print('iniciando matado de proceso')
+        for i in psutil.pids():
+            process = psutil.Process(i)
+            if process.name() == '3001':
+                process.kill()
+                print(f'kill 3001')
+            if process.name() == 'CCM':
+                process.kill()
+                print(f'kill CCM')
+            if process.name() == 'Sockmon':
+                process.kill()
+                print(f'kill Sockmon')
+            if process.name() == 'Sockserver':
+                process.kill()
+                print(f'kill Sockserver')
+
+        print('fin de matado de proceso')
+
+            # EJECUTAMOS LOS PROCESOS
 
 
 if __name__=='__main__':
@@ -134,6 +153,7 @@ if __name__=='__main__':
 
     while True:
         rpt=str(input('''¿Ingrese Accion?
+K ==> kill procesos
 S ==> Inicio Proceso.
 P ==> Prepara Maquina.
 C ==> Cancelar todo.
@@ -144,6 +164,8 @@ ST ==> Stock
 del==> Elimina Cola
 pur ==> Purga Cola 
 '''))
+        if rpt=='K':
+            killProcesos();
         if rpt=='S':
             #msg.sendStart()
             #print('Mensaje Enviado')
