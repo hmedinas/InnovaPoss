@@ -165,7 +165,7 @@ del==> Elimina Cola
 pur ==> Purga Cola 
 '''))
         if rpt=='K':
-            killProcesos()
+            msg.killProcesos()
         if rpt=='S':
             #msg.sendStart()
             #print('Mensaje Enviado')
