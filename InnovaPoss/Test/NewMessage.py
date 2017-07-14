@@ -20,6 +20,11 @@ from pika.utils import is_callable
 from pika.compat import unicode_type, dictkeys, as_bytes
 
 import datetime
+import psutil
+import sys
+import subprocess
+import time
+import os
 
 
 LOGGER = logging.getLogger(__name__)
@@ -57,8 +62,6 @@ class SendMessageRabbit():
       self.Canal=self.Conexion.channel()
       pass
    
-
-    
     def sendStart(self):
        
         Cx=pika.BlockingConnection(pika.URLParameters(self.Credenciales))
@@ -91,9 +94,7 @@ class SendMessageRabbit():
                          type=ComandType
                          #,expiration='200000'
                       ))
-                    
-        #self.Conexion.close()
-
+     
     def queue_delete(self,_Queue:str=None):  
         if _Queue is None:
              self.Canal.queue_delete(_Queue,False,False)         
