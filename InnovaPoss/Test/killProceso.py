@@ -5,22 +5,15 @@ import subprocess
 import time
 import os
 
-psutil.pids()
+
 print('iniciando matado de proceso')
 
 for i in psutil.pids():
     process = psutil.Process(i)
-    if process.name() == '3001':
+    if process.name() == '3001' or  process.name() == 'CCM' or  process.name() == 'Sockmon' or process.name() == 'Sockserver':
+        print(f'matando proceso : {process.name()}')
         process.kill()
-        print(f'kill 3001')
-    if process.name() == 'CCM':
-        process.kill()
-        print(f'kill CCM')
-    if process.name() == 'Sockmon':
-        process.kill()
-        print(f'kill Sockmon')
-    if process.name() == 'Sockserver':
-        process.kill()
-        print(f'kill Sockserver')
+        print('proceso muerto')
+   
 
 print('fin de matado de proceso')
