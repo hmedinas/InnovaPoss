@@ -79,25 +79,25 @@ if __name__ == "__main__":
     i=0
     while True:
         rpt=str(input('''¿Iniciar Servicios?
-0 ==> Matar todos los procesos
-1 ==> Inicia CCM
-2 ==> Inicia 3001.
-3 ==> Inicia Sockserver.
-4 ==> Inicia Sockmon.
+X ==> Matar todos los procesos
+A ==> Inicia CCM
+B ==> Inicia 3001.
+C ==> Inicia Sockserver.
+E ==> Inicia Sockmon.
 
 '''))
-        if rpt==0:
+        if rpt=='X':
             killProces()
             print('Proceso Matado')
-        if rpt==1:
+        if rpt=='A':
             os.system("fuser -k 3000/tcp")
             startCCM()           
-        if rpt==2:
+        if rpt=='B':
             os.system("fuser -k 3001/tcp")
             start3001()
-        if rpt==3:
+        if rpt=='C':
             startSockserver()
-        if rpt==4:
+        if rpt=='D':
             startSockmon()
         
 
