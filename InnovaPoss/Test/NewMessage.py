@@ -27,9 +27,9 @@ MAX_CHANNELS = 32768
 
 
 class Messaje():
-    Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":3600}'
-    Prepare:str=' {"Comand": "PREPARE","Phone": ""}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":1,"Promo":"true" } '
+    Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":60}'
+    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"1,3"}'
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,3", "Price":1,"Promo":"true" } '
     Cancel:str=''
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
@@ -119,12 +119,6 @@ if __name__=='__main__':
     _client:str=''
 
 
-    fecha:datetime=None
-    fecha1=datetime.datetime.now()
-    fecha2=datetime.timedelta(minutes=2,seconds=0)
-    Resul=fecha1+fecha2
-    print(type(Resul))
-    print(Resul.strftime('%H:%M:%S'))
 
     #rpt=msg.restar_hora("10:40:50","10:30:30")
     
