@@ -19,7 +19,7 @@ import pika.spec as spec
 from pika.utils import is_callable
 from pika.compat import unicode_type, dictkeys, as_bytes
 
-
+import json
 
 
 LOGGER = logging.getLogger(__name__)
@@ -34,6 +34,13 @@ class Messaje():
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
+    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5}}'
+    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"11"}'
+    
+    SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:5,13:6,14:5,15:8,16:8,21:8,22:8,23:8,24:8,25:9,26:8,31:8,32:8,33:8,34:8,35:8,36:8,41:8,42:8,43:8,44:8,45:8,46:8,51:8,52:8,53:8,54:8,55:8,56:8"}'
+    GetStockFull:str='{"Comand":"GET_STOCK_FULL"}'
+    SetPrecio:str='{"Comand":"SET_PRICE","CARRIL":"11","PRICE":"150"}'
+
 class ComandType():
     Start:str='ccm.start'
     Prepare:str='ccm.prepare'
@@ -42,6 +49,13 @@ class ComandType():
     Finish:str='ccm.finish'
     ServerMsg:str='ccm.server'
     Stock:str='ccm.stock'
+
+    SetStock:str='ccm.SetStock'
+    GetStock:str='ccm.GetStock'
+
+    SetStockFull:str='ccm.SetStockFull'
+    GetStockFull:str='ccm.GetStockFull'
+    SetPrecio:str='ccm.SetPrecio'
 
 
 class SendMessageRabbit():
@@ -111,6 +125,9 @@ class SendMessageRabbit():
             # EJECUTAMOS LOS PROCESOS
 
 
+
+
+
 if __name__=='__main__':
     msg=SendMessageRabbit()
     _ComandType=ComandType()
@@ -118,7 +135,17 @@ if __name__=='__main__':
     _server:str=''
     _client:str=''
 
+    params: dict = json.loads('{"Comand":"SET_STOCK","CARRILES":{"11":2,"12":5,"13":6,"14":5}}')
+    dd=params['CARRILES']
+    print(f'{dd}')
+    for i in dd:
+        print(f'{i[0:1]}-{i[-1]}')
+        
+        
+        print(f'{dd[i]}')
 
+        
+    
 
     #rpt=msg.restar_hora("10:40:50","10:30:30")
     
@@ -136,6 +163,12 @@ MS ==> Mensaje servidor
 ST ==> Stock
 del==> Elimina Cola
 pur ==> Purga Cola 
+
+SS ==> Set Stock
+GS ==> Get Stock por Carril
+SSF ==> Set Stock Full
+GSF ==> Get Stock Full
+SP  ==> Set precio 
 '''))
         if rpt=='K':
             msg.killProcesos()
@@ -164,3 +197,18 @@ pur ==> Purga Cola
         if rpt=='ST':
             msg.sendMessage(ComandType=_ComandType.Stock,_Queue=msg.IN_NameQueue_Server,_Message='',_durable=True)
             print('Mensaje Server')
+        if rpt=='SS':
+            msg.sendMessage(ComandType=_ComandType.SetStock,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.SetStock,_durable=True)
+            print('Put stock Server')
+        if rpt=='GS':
+            msg.sendMessage(ComandType=_ComandType.GetStock,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.GetStock,_durable=True)
+            print('Get stock Server')
+        if rpt=='SSF':
+            msg.sendMessage(ComandType=_ComandType.SetStockFull,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.SetStockFull,_durable=True)
+            print('set full stock')
+        if rpt=='GSF':
+            msg.sendMessage(ComandType=_ComandType.GetStockFull,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.GetStockFull,_durable=True)
+            print('Get full Stock')
+        if rpt=='SP':
+            msg.sendMessage(ComandType=_ComandType.SetPrecio,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.SetPrecio,_durable=True)
+            print('Set Price')
