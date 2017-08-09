@@ -28,14 +28,15 @@ MAX_CHANNELS = 32768
 
 class Messaje():
     Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":60}'
-    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"1,3"}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,3", "Price":1,"Promo":"true" } '
+    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"4,5"}'
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"4,5", "Price":0,"Promo":"true","User":"null","Camp":"null"}'
     Cancel:str=''
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
-    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5}}'
-    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"11"}'
+    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
+    #SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"56":1}}'
+    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"56"}'
     
     SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:5,13:6,14:5,15:8,16:8,21:8,22:8,23:8,24:8,25:9,26:8,31:8,32:8,33:8,34:8,35:8,36:8,41:8,42:8,43:8,44:8,45:8,46:8,51:8,52:8,53:8,54:8,55:8,56:8"}'
     GetStockFull:str='{"Comand":"GET_STOCK_FULL"}'
@@ -137,15 +138,6 @@ if __name__=='__main__':
 
     params: dict = json.loads('{"Comand":"SET_STOCK","CARRILES":{"11":2,"12":5,"13":6,"14":5}}')
     dd=params['CARRILES']
-    print(f'{dd}')
-    for i in dd:
-        print(f'{i[0:1]}-{i[-1]}')
-        
-        
-        print(f'{dd[i]}')
-
-        
-    
 
     #rpt=msg.restar_hora("10:40:50","10:30:30")
     
@@ -163,7 +155,6 @@ MS ==> Mensaje servidor
 ST ==> Stock
 del==> Elimina Cola
 pur ==> Purga Cola 
-
 SS ==> Set Stock
 GS ==> Get Stock por Carril
 SSF ==> Set Stock Full
