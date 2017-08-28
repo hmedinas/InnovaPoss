@@ -34,13 +34,13 @@ class Messaje():
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
-    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
-    #SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"56":1}}'
-    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"56"}'
+    #SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
+    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"51":2}}'
+    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"51"}'
     
     SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:5,13:6,14:5,15:8,16:8,21:8,22:8,23:8,24:8,25:9,26:8,31:8,32:8,33:8,34:8,35:8,36:8,41:8,42:8,43:8,44:8,45:8,46:8,51:8,52:8,53:8,54:8,55:8,56:8"}'
     GetStockFull:str='{"Comand":"GET_STOCK_FULL"}'
-    SetPrecio:str='{"Comand":"SET_PRICE","CARRIL":"11","PRICE":"150"}'
+    SetPrecio:str='{"Comand":"SET_PRICE","CARRIL":"46","PRICE":"150"}'
 
 class ComandType():
     Start:str='ccm.start'
