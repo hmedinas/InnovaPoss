@@ -34,13 +34,15 @@ class Messaje():
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
-    #SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
-    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"51":2}}'
-    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"51"}'
+    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
+    #SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"21":2}}'
+    GetStock:str='{"Comand":"GET_STOCK","CARRIL":"21"}'
     
     SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:5,13:6,14:5,15:8,16:8,21:8,22:8,23:8,24:8,25:9,26:8,31:8,32:8,33:8,34:8,35:8,36:8,41:8,42:8,43:8,44:8,45:8,46:8,51:8,52:8,53:8,54:8,55:8,56:8"}'
     GetStockFull:str='{"Comand":"GET_STOCK_FULL"}'
     SetPrecio:str='{"Comand":"SET_PRICE","CARRIL":"46","PRICE":"150"}'
+    LocalStart:str=''
+    localDispacher:str=''
 
 class ComandType():
     Start:str='ccm.start'
@@ -58,9 +60,14 @@ class ComandType():
     GetStockFull:str='ccm.GetStockFull'
     SetPrecio:str='ccm.SetPrecio'
 
+    LocalStart:str='IniLocalApp'
+    LocalDipacher:str='DispacherLocal'
+
 
 class SendMessageRabbit():
-    Credenciales:str='ampqs://innova_demo:dimatica@innova.boromak.com'
+    '''ampqs://innova_demo:dimatica@innova.boromak.com
+    '''
+    Credenciales:str='ampq://guest:guest@localhost:5672'
     IN_NameQueue_Server:str="IN_123456789"
     PUT_NameQueue_Server:str="OUT_123456789"
     IN_NameQueue_App:str="PHONE_START_IN"
@@ -160,6 +167,8 @@ GS ==> Get Stock por Carril
 SSF ==> Set Stock Full
 GSF ==> Get Stock Full
 SP  ==> Set precio 
+LS ==> Local Start
+LD ==> Local Dispacher
 '''))
         if rpt=='K':
             msg.killProcesos()
@@ -203,3 +212,9 @@ SP  ==> Set precio
         if rpt=='SP':
             msg.sendMessage(ComandType=_ComandType.SetPrecio,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.SetPrecio,_durable=True)
             print('Set Price')
+        if rpt=='LS':
+            msg.sendMessage(ComandType=_ComandType.LocalStart,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.LocalStart,_durable=True)
+            print('inicio LocalHost')
+        if rpt=='LD':
+            msg.sendMessage(ComandType=_ComandType.LocalDipacher,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.localDispacher,_durable=True)
+            print('Despachando LocalHost')
