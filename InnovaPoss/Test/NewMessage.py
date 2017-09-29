@@ -29,10 +29,10 @@ MAX_CHANNELS = 32768
 class Messaje():
     Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":60}'
     Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"1,4"}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,4", "Price":2,"Promo":"true","User":"null","Camp":"null"}'
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,1", "Price":2,"Promo":"true","User":"null","Camp":"null"}'
     Cancel:str=''
     Finish:str=''
-    ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
+    ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,1"}'
 
     SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
     SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"51":1}}'
