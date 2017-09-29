@@ -28,8 +28,8 @@ MAX_CHANNELS = 32768
 
 class Messaje():
     Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":60}'
-    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"4,5"}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"4,5", "Price":0,"Promo":"true","User":"null","Camp":"null"}'
+    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"1,4"}'
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"1,4", "Price":2,"Promo":"true","User":"null","Camp":"null"}'
     Cancel:str=''
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
@@ -189,7 +189,7 @@ LD ==> Local Dispacher
             msg.sendMessage(ComandType=_ComandType.Cancel,_Queue='',_Message=_oMessage.Cancel,_durable=True)
             print('Cancelada')
         if rpt=='D':
-            msg.sendMessage(ComandType=_ComandType.Disapacher,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.Dispachar,_durable=True)
+            msg.sendMessage(ComandType=_ComandType.Disapacher,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Dispachar,_durable=True)
             print('Despachando')
         if rpt=='F':
             msg.sendMessage(ComandType=_ComandType.Finish,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Finish,_durable=True)
