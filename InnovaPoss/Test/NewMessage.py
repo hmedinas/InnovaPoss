@@ -192,7 +192,7 @@ LD ==> Local Dispacher
             msg.sendMessage(ComandType=_ComandType.Disapacher,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Dispachar,_durable=True)
             print('Despachando')
         if rpt=='F':
-            msg.sendMessage(ComandType=_ComandType.Finish,_Queue=msg.IN_NameQueue_App,_Message=_oMessage.Finish,_durable=True)
+            msg.sendMessage(ComandType=_ComandType.Finish,_Queue=msg.IN_NameQueue_Server,_Message=_oMessage.Finish,_durable=True)
             print('Finalizado')
         if rpt=='MS':
              msg.sendMessage(ComandType=_ComandType.ServerMsg,_Queue='OUT_ServerREAD',_Message=_oMessage.ServerMsg,_durable=True)
