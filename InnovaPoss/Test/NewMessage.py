@@ -28,22 +28,22 @@ MAX_CHANNELS = 32768
 
 class Messaje():
     Start:str='{"Comand": "START","QueueIn": "PHONE_START_IN","QueueOut": "PHONE_START_OUT","QueueTime":60}'
-    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"2,1"}'
-    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"2,1", "Price":1,"Promo":"true","User":"null","Camp":"null"}'
+    Prepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"5,1"}'
+    Dispachar:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"5,1", "Price":0,"Promo":"true","User":"null","Camp":"null"}'
     Cancel:str=''
     Finish:str=''
     ServerMsg:str='{"Comand":"DISPACHER","MACHINE":"001233998873","CARRIL":"1,2"}'
 
-    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":5,"13":6,"14":5,"15":7, "16":5,"21":5,"22":6,"23":6,"24":6,"25":7,"26":8,"31":5,"32":6,"33":7,"34":8,"35":7,"36":8,"41":5,"42":6,"43":7,"44":8,"45":7,"46":8,"51":5,"52":6,"53":7,"54":8,"55":7,"56":8}}'
+    SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"11":2,"12":2,"13":2,"14":2,"15":2, "16":2,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"41":1,"42":1,"43":1,"44":1,"45":1,"46":1,"51":1,"52":1,"53":1,"54":1,"55":1,"56":1}}'
     SetStock:str='{"Comand":"SET_STOCK","CARRIL":{"51":1}}'
     GetStock:str='{"Comand":"GET_STOCK","CARRIL":"51"}'
     
-    SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:5,13:6,14:5,15:8,16:8,21:8,22:8,23:8,24:8,25:9,26:8,31:8,32:8,33:8,34:8,35:8,36:8,41:8,42:8,43:8,44:8,45:8,46:8,51:8,52:8,53:8,54:8,55:8,56:8"}'
+    SetStockFull:str='{"Comand":"SET_STOCK_FULL","CARRIL":"11:2,12:2,13:2,14:2,15:2,16:2,21:0,22:0,23:0,24:0,25:0,26:0,31:0,32:0,33:0,34:0,35:0,36:0,41:1,42:1,43:1,44:1,45:1,46:1,51:1,52:1,53:1,54:1,55:1,56:1"}'
     GetStockFull:str='{"Comand":"GET_STOCK_FULL"}'
     SetPrecio:str='{"Comand":"SET_PRICE","CARRIL":"46","PRICE":"150"}'
     LocalStart:str='{"Comand": "START","QueueIn": "","QueueOut": "","QueueTime":60}'
-    LocalPrepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"4,5"}'
-    localDispacher:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"4,5", "Price":0,"Promo":"false","User":"Localhost","Camp":"null"}'
+    LocalPrepare:str=' {"Comand": "PREPARE","Phone": "","Carril":"5,1"}'
+    localDispacher:str='{"Comand": "DISPACHER","Phone": "-", "Ejecut": "2", "Carril":"5,1", "Price":0,"Promo":"false","User":"Localhost","Camp":"null"}'
 
 class ComandType():
     Start:str='ccm.start'
@@ -69,6 +69,7 @@ class ComandType():
 class SendMessageRabbit():
     '''ampqs://innova_demo:dimatica@innova.boromak.com
         ampq://guest:guest@localhost:5672
+        amqp://guest:guest@innova.vservers.es:5672
     '''
     Credenciales:str='ampqs://innova_demo:dimatica@innova.boromak.com'
     IN_NameQueue_Server:str="IN_123456789"
